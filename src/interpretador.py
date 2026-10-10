@@ -81,9 +81,6 @@ class Interpretador:
         return "OK"
 
     def finalizar_quantum(self, processo, executadas, bloqueou, terminou):
-        palavra = "instrução" if executadas == 1 else "instruções"
-        self.registrar(f"Interrompendo {processo.nome_programa} após {executadas} {palavra}")
-
         # estatisticas 
         self.total_interrupcoes += 1
         self.total_instrucoes += executadas
@@ -92,6 +89,10 @@ class Interpretador:
             self.registrar(f"{processo.nome_programa} terminado. X={processo.x}. Y={processo.y}")
             processo.estado = "TERMINADO"
             self.tabela.remove(processo)
+        else:
+            # só regista o "interrompendo..." se o programa nãao terminou
+            palavra = "instrução" if executadas == 1 else "instruções"
+            self.registrar(f"Interrompendo {processo.nome_programa} após {executadas} {palavra}")
 
         # atualiza fila de bloqueados pq caso o atual blouqueie, ele ainda n perca 1 tb
         self.filas.atualizar_fila_bloqueados()
