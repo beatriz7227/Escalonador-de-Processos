@@ -22,23 +22,6 @@ class Filas:
         processo.estado = "PRONTO"
         self.fila_prontos.append(processo)
 
-    def descontar_credito(self, processo):
-        if processo.creditos > 0:
-            processo.creditos -= 1
-            self.ordenar_por_creditos()
-        if processo.creditos == 0:
-            self.fila_prontos.remove(processo)
-            self.inserir_fim_fila_prontos(processo)
-        
-    def verificar_todos_zerados(self):
-        if not self.fila_prontos:
-            return False
-            
-        for processo in self.fila_prontos:
-            if processo.creditos > 0:
-                return False
-        return True
-
     def redistribuir_creditos(self, tabela_processos):
         for processo in tabela_processos:
             processo.creditos = processo.prioridade
