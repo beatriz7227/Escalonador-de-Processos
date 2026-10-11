@@ -1,3 +1,4 @@
+# Bloco de Controle de Processo que contém todo o contexto do processo
 class BCP:
     def __init__(self, nome_programa, instrucoes, prioridade):
         self.nome_programa = nome_programa  
